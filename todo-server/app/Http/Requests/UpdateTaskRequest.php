@@ -13,7 +13,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,11 @@ class UpdateTaskRequest extends FormRequest
     {
         return [
             //
+            'deadline' => 'date|nullable',
+            'name' => 'string|max:255',
+            'description' => 'string|nullable',
+            'labels' => 'array|nullable',
+            'labels.*' => 'integer|exists:labels,id'
         ];
     }
 }

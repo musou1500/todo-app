@@ -27,7 +27,7 @@ class StoreTaskRequest extends FormRequest
             'deadline' => 'date|nullable',
             'name' => 'required|string|max:255',
             'description' => 'string|nullable',
-            'labels' => 'array',
+            'labels' => 'array|nullable',
             'labels.*' => 'integer|exists:labels,id'
         ];
     }
