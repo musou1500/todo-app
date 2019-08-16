@@ -6,6 +6,8 @@ use App\Rules\ColorCode;
 use App\Task;
 use Faker\Provider\Color;
 use Illuminate\Http\Request;
+use App\Httpp\Requests\StoreTaskRequest;
+use App\Httpp\Requests\UpdateTaskRequest;
 use Illuminate\Http\Response;
 
 class TaskController extends Controller
@@ -27,19 +29,11 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        $data = $request->validate([
-            'deadline' => 'date|nullable',
-            'name' => 'required|string|max:255',
-            'description' => 'string|nullable',
-            'labels' => 'array',
-            'labels.*' => 'integer|exists:labels,id'
-        ]);
-
-        $task = Task::create($data);
-        if(isset($data['labels'])) {
-            $task->setLabelIds($data['labels']);
+        $task = Task::create($request->except('labels'));
+        if($request->has('labels')) {
+            $task->setLabelIds($request->labels);
         }
     }
 
@@ -61,20 +55,11 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
-        $data = $request->validate([
-            'deadline' => 'date|nullable',
-            'name' => 'string|max:255|nullable',
-            'done' => 'boolean',
-            'description' => 'string|nullable',
-            'labels' => 'array',
-            'labels.*' => 'integer|exists:labels,id'
-        ]);
-
-        $task->fill($data)->save();
-        if(isset($data['labels'])) {
-            $task->setLabelIds($data['labels']);
+        $task->fill($request->except('labels'))->save();
+        if($request->has('labels')) {
+            $task->setLabelIds($request->labels);
         }
         return $task;
     }
