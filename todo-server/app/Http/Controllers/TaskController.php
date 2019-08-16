@@ -31,10 +31,12 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $task = Task::create($request->except('labels'));
-        if($request->has('labels')) {
-            $task->setLabelIds($request->labels);
-        }
+        return DB::transaction(function () use ($request) {
+            $task = Task::create($request->except('labels'));
+            if($request->has('labels')) {
+                $task->setLabelIds($request->labels);
+            }
+        });
     }
 
     /**
@@ -57,11 +59,13 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        $task->fill($request->except('labels'))->save();
-        if($request->has('labels')) {
-            $task->setLabelIds($request->labels);
-        }
-        return $task;
+        return DB::transaction(function () use ($request, $task) {
+            $task->fill($request->except('labels'))->save();
+            if ($request->has('labels')) {
+                $task->setLabelIds($request->labels);
+            }
+            return $task;
+        });
     }
 
     /**
