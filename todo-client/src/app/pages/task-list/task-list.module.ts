@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {TaskListPage} from './task-list.page';
 import {BlankSlateModule} from '../../components/blank-slate';
+import {SpinnerModule} from '../../components/spinner';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     BlankSlateModule,
+    SpinnerModule,
     RouterModule.forChild(routes),
   ],
   declarations: [TaskListPage],
