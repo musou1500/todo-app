@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Routes, RouterModule} from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { TaskListPage } from './task-list.page';
+import {TaskListPage} from './task-list.page';
+import {BlankSlateModule} from '../../components/blank-slate';
 
 const routes: Routes = [
   {
     path: '',
-    component: TaskListPage
-  }
+    component: TaskListPage,
+  },
 ];
 
 @NgModule({
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    BlankSlateModule,
+    RouterModule.forChild(routes),
   ],
-  declarations: [TaskListPage]
+  declarations: [TaskListPage],
 })
 export class TaskListPageModule {}
