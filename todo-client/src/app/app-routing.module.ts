@@ -6,13 +6,6 @@ import { EnsureLabelGuard } from './guards/ensure-label.guard';
 const routes: Routes = [
   {path: '', redirectTo: 'app/tabs', pathMatch: 'full'},
   {
-    path: 'task-list',
-    loadChildren: () =>
-      import('./pages/task-list/task-list.module').then(
-        m => m.TaskListPageModule,
-      ),
-  },
-  {
     path: 'edit-task/:id',
     loadChildren: () =>
       import('./pages/edit-task/edit-task.module').then(
@@ -32,13 +25,6 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () =>
       import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
-  },
-  {
-    path: 'label-list',
-    loadChildren: () =>
-      import('./pages/label-list/label-list.module').then(
-        m => m.LabelListPageModule,
-      ),
   },
   {
     path: 'edit-label',
