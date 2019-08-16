@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ (selectedTask$ | async) ? 'タスクを編集' : 'タスクを作成' }}
+    </ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button
+        color="danger"
+        *ngIf="selectedTask$ | async"
+        (click)="delete()"
+      >
+        削除
+      </ion-button>
+      <ion-button [disabled]="formGroup.invalid" (click)="save()">
+        保存
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list [formGroup]="formGroup">
+    <ion-item>
+      <ion-label position="stacked">名前</ion-label>
+      <ion-input
+        placeholder="例) 買い物に行く"
+        formControlName="name"
+      ></ion-input>
+    </ion-item>
+    <app-show-error control="name"></app-show-error>
+    <ion-item>
+      <ion-label position="stacked">内容</ion-label>
+      <ion-textarea
+        placeholder="例) ガラムマサラを買う"
+        formControlName="description"
+      ></ion-textarea>
+    </ion-item>
+    <app-show-error control="description"></app-show-error>
+    <ion-item>
+      <ion-label position="stacked">締め切り</ion-label>
+      <ion-datetime
+        formControlName="deadline"
+        displayFormat="YYYY年M月D日"
+        placeholder="締め切り日を選択"
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">ラベル</ion-label>
+      <ion-select
+        multiple="true"
+        placeholder="ラベルを選択"
+        formControlName="labels"
+      >
+        <ion-select-option
+          *ngFor="let label of labels$ | async labels"
+          [value]="label.id"
+        >
+          {{ label.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ng-container *ngIf="selectedTask$ | async as selectedTask">
+    <ion-button expand="block" fill="clear" (click)="toggleDone()">
+      <ion-icon name="checkmark" slot="start"></ion-icon>
+      {{ selectedTask.done ? '未完了に戻す' : '完了' }}
+    </ion-button>
+  </ng-container>
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>タスク</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/edit-task">
+        タスクを作成
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="loaded$ | async; else notLoadedTpl">
+    <ng-container *ngIf="tasks$ | async as tasks">
+      <ion-list *ngIf="tasks.length > 0; else tasksEmptyTpl">
+        <ion-item
+          *ngFor="let task of tasks"
+          [routerLink]="['/edit-task', task.id]"
+        >
+          <ion-label>
+            <h3 [ngClass]="{ 'is-done': task.done }">{{task.name}}</h3>
+            <p>{{task.description}}</p>
+            <p *ngIf="task.deadline">
+              {{task.deadline | date: 'yyyy年M月d日'}}まで
+            </p>
+
+            <p>
+              <ion-badge
+                color="light"
+                *ngFor="let label of task.labels"
+                margin-right
+              >
+                {{label.name}}
+              </ion-badge>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ng-template #tasksEmptyTpl>
+        <div padding text-center>
+          <ion-note>タスクはありません</ion-note>
+        </div>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-template #notLoadedTpl>
+    <div padding text-center>
+      <ion-spinner></ion-spinner>
+    </div>
+  </ng-template>
+</ion-content>

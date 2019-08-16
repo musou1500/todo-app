@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ (selectedLabel$ | async) ? 'ラベルを編集' : 'ラベルを作成' }}
+    </ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button
+        color="danger"
+        *ngIf="selectedLabel$ | async"
+        (click)="delete()"
+      >
+        削除
+      </ion-button>
+      <ion-button (click)="save()" [disabled]="formGroup.invalid">
+        保存
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list [formGroup]="formGroup">
+    <ion-item>
+      <ion-label position="stacked">名前</ion-label>
+      <ion-input placeholder="例) 仕事" formControlName="name"></ion-input>
+    </ion-item>
+    <app-show-error control="name"></app-show-error>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ラベル</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/edit-label">ラベルを作成</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="loaded$ | async; else notLoadedTpl">
+    <ng-container *ngIf="labels$ | async as labels">
+      <ion-list *ngIf="labels.length > 0; else labelsEmptyTpl">
+        <ion-item
+          *ngFor="let label of labels"
+          [routerLink]="['/edit-label', label.id]"
+          >{{label.name}}</ion-item
+        >
+      </ion-list>
+
+      <ng-template #labelsEmptyTpl>
+        <div padding text-center>
+          <ion-note>ラベルはありません</ion-note>
+        </div>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-template #notLoadedTpl>
+    <div padding text-center>
+      <ion-spinner></ion-spinner>
+    </div>
+  </ng-template>
+</ion-content>
