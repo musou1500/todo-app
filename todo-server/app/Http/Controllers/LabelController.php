@@ -26,7 +26,8 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        return Label::create($request->all());
+        $data = $request->validate(['name' => 'required']);
+        return Label::create($data);
     }
 
     /**
@@ -50,7 +51,8 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        $label->fill($request->all())->save();
+        $data = $request->validate(['name' => 'required']);
+        $label->fill($data)->save();
         return $label;
     }
 
