@@ -6,8 +6,8 @@ use App\Rules\ColorCode;
 use App\Task;
 use Faker\Provider\Color;
 use Illuminate\Http\Request;
-use App\Httpp\Requests\StoreTaskRequest;
-use App\Httpp\Requests\UpdateTaskRequest;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Http\Response;
 
 class TaskController extends Controller
@@ -31,7 +31,7 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        return DB::transaction(function () use ($request) {
+        return \DB::transaction(function () use ($request) {
             $task = Task::create($request->except('labels'));
             if($request->has('labels')) {
                 $task->setLabelIds($request->labels);
@@ -59,7 +59,7 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        return DB::transaction(function () use ($request, $task) {
+        return \DB::transaction(function () use ($request, $task) {
             $task->fill($request->except('labels'))->save();
             if ($request->has('labels')) {
                 $task->setLabelIds($request->labels);
