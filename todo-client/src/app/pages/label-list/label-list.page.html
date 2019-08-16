@@ -3,7 +3,7 @@
     <ion-title>ラベル</ion-title>
 
     <ion-buttons slot="primary">
-      <ion-button routerLink="/edit-label">ラベルを作成</ion-button>
+      <ion-button routerLink="/labels/create">ラベルを作成</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -18,7 +18,7 @@
       <ion-list *ngIf="labels.length > 0; else labelsEmptyTpl">
         <ion-item
           *ngFor="let label of labels"
-          [routerLink]="['/edit-label', label.id]"
+          [routerLink]="['/labels', label.id]"
           >{{label.name}}</ion-item
         >
       </ion-list>

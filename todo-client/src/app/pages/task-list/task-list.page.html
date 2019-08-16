@@ -3,7 +3,7 @@
     <ion-title>タスク</ion-title>
 
     <ion-buttons slot="primary">
-      <ion-button routerLink="/edit-task">
+      <ion-button routerLink="/tasks/create">
         タスクを作成
       </ion-button>
     </ion-buttons>
@@ -20,7 +20,7 @@
       <ion-list *ngIf="tasks.length > 0; else tasksEmptyTpl">
         <ion-item
           *ngFor="let task of tasks"
-          [routerLink]="['/edit-task', task.id]"
+          [routerLink]="['/tasks', task.id]"
         >
           <ion-label>
             <h3 [ngClass]="{ 'is-done': task.done }">{{task.name}}</h3>
