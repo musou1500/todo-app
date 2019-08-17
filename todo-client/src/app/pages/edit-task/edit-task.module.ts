@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 
-import {IonicModule} from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import {EditTaskPage} from './edit-task.page';
-import {ShowErrorModule} from 'src/app/components/show-error';
+import { EditTaskPage } from "./edit-task.page";
+import { ShowErrorModule } from "src/app/components/show-error";
 
 const routes: Routes = [
   {
-    path: '',
-    component: EditTaskPage,
-  },
+    path: "",
+    component: EditTaskPage
+  }
 ];
 
 @NgModule({
@@ -21,8 +21,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ShowErrorModule,
+    ShowErrorModule
   ],
-  declarations: [EditTaskPage],
+  declarations: [EditTaskPage]
 })
 export class EditTaskPageModule {}

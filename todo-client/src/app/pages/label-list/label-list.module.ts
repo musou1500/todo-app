@@ -1,19 +1,19 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 
-import {IonicModule} from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import {LabelListPage} from './label-list.page';
-import {BlankSlateModule} from '../../components/blank-slate';
-import {SpinnerModule} from '../../components/spinner';
+import { LabelListPage } from "./label-list.page";
+import { BlankSlateModule } from "../../components/blank-slate";
+import { SpinnerModule } from "../../components/spinner";
 
 const routes: Routes = [
   {
-    path: '',
-    component: LabelListPage,
-  },
+    path: "",
+    component: LabelListPage
+  }
 ];
 
 @NgModule({
@@ -23,8 +23,8 @@ const routes: Routes = [
     IonicModule,
     BlankSlateModule,
     SpinnerModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
-  declarations: [LabelListPage],
+  declarations: [LabelListPage]
 })
 export class LabelListPageModule {}

@@ -1,18 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {State} from '../../store';
-import {Store, select} from '@ngrx/store';
+import { Component, OnInit } from "@angular/core";
+import { State } from "../../store";
+import { Store, select } from "@ngrx/store";
 import {
   selectLoading,
   selectLabels,
   loadLabels,
-  selectLoaded,
-} from '../../store/label';
-import {first, filter} from 'rxjs/operators';
+  selectLoaded
+} from "../../store/label";
+import { first, filter } from "rxjs/operators";
 
 @Component({
-  selector: 'app-label-list',
-  templateUrl: './label-list.page.html',
-  styleUrls: ['./label-list.page.scss'],
+  selector: "app-label-list",
+  templateUrl: "./label-list.page.html",
+  styleUrls: ["./label-list.page.scss"]
 })
 export class LabelListPage implements OnInit {
   loading$ = this.store.pipe(select(selectLoading));
@@ -30,7 +30,7 @@ export class LabelListPage implements OnInit {
     this.loading$
       .pipe(
         filter(loading => !loading),
-        first(),
+        first()
       )
       .subscribe(() => event.target.complete());
   }

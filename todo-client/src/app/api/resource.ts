@@ -1,6 +1,6 @@
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
 
 export class ApiResource<T> {
   constructor(private httpClient: HttpClient, private name: string) {}
@@ -12,7 +12,7 @@ export class ApiResource<T> {
   update(id: number, body: Partial<T>): Observable<T> {
     return this.httpClient.patch<T>(
       `${environment.apiBase}/${this.name}/${id}`,
-      body,
+      body
     );
   }
 

@@ -1,1 +1,1 @@
-export * from './blank-slate.module';
+export * from "./blank-slate.module";

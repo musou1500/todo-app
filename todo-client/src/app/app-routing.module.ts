@@ -1,54 +1,54 @@
-import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {EnsureTaskGuard} from './guards/ensure-task.guard';
-import {EnsureLabelGuard} from './guards/ensure-label.guard';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { EnsureTaskGuard } from "./guards/ensure-task.guard";
+import { EnsureLabelGuard } from "./guards/ensure-label.guard";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'app/tabs', pathMatch: 'full'},
+  { path: "", redirectTo: "app/tabs", pathMatch: "full" },
   {
-    path: 'tasks/create',
+    path: "tasks/create",
     loadChildren: () =>
-      import('./pages/edit-task/edit-task.module').then(
-        m => m.EditTaskPageModule,
+      import("./pages/edit-task/edit-task.module").then(
+        m => m.EditTaskPageModule
       ),
-    canActivate: [EnsureTaskGuard],
+    canActivate: [EnsureTaskGuard]
   },
   {
-    path: 'tasks/:id',
+    path: "tasks/:id",
     loadChildren: () =>
-      import('./pages/edit-task/edit-task.module').then(
-        m => m.EditTaskPageModule,
+      import("./pages/edit-task/edit-task.module").then(
+        m => m.EditTaskPageModule
       ),
-    canActivate: [EnsureTaskGuard],
+    canActivate: [EnsureTaskGuard]
   },
 
   {
-    path: 'app',
+    path: "app",
     loadChildren: () =>
-      import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
+      import("./pages/tabs/tabs.module").then(m => m.TabsPageModule)
   },
   {
-    path: 'labels/create',
+    path: "labels/create",
     loadChildren: () =>
-      import('./pages/edit-label/edit-label.module').then(
-        m => m.EditLabelPageModule,
+      import("./pages/edit-label/edit-label.module").then(
+        m => m.EditLabelPageModule
       ),
-    canActivate: [EnsureLabelGuard],
+    canActivate: [EnsureLabelGuard]
   },
   {
-    path: 'labels/:id',
+    path: "labels/:id",
     loadChildren: () =>
-      import('./pages/edit-label/edit-label.module').then(
-        m => m.EditLabelPageModule,
+      import("./pages/edit-label/edit-label.module").then(
+        m => m.EditLabelPageModule
       ),
-    canActivate: [EnsureLabelGuard],
-  },
+    canActivate: [EnsureLabelGuard]
+  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -1,9 +1,9 @@
-import {Component, Host, Input} from '@angular/core';
-import {FormGroupDirective, FormGroup} from '@angular/forms';
+import { Component, Host, Input } from "@angular/core";
+import { FormGroupDirective, FormGroup } from "@angular/forms";
 
 // from modules/playground/src/model_driven_forms/index.ts
 @Component({
-  selector: 'app-show-error',
+  selector: "app-show-error",
   template: `
     <ion-note class="input-helper" color="danger" *ngIf="errorMessage !== null">
       {{ errorMessage }}
@@ -14,8 +14,8 @@ import {FormGroupDirective, FormGroup} from '@angular/forms';
       .input-helper {
         margin-left: 16px;
       }
-    `,
-  ],
+    `
+  ]
 })
 export class ShowErrorComponent {
   formDir: FormGroupDirective;
@@ -24,7 +24,7 @@ export class ShowErrorComponent {
   control: string;
 
   @Input()
-  errors: string[] = ['required', 'email'];
+  errors: string[] = ["required", "email"];
 
   constructor(@Host() formDir: FormGroupDirective) {
     this.formDir = formDir;
@@ -44,9 +44,9 @@ export class ShowErrorComponent {
   }
 
   private _errorMessage(code: string): string {
-    const config: {[key: string]: string} = {
-      required: 'この項目は必須です',
-      email: 'メールの形式に誤りがあります',
+    const config: { [key: string]: string } = {
+      required: "この項目は必須です",
+      email: "メールの形式に誤りがあります"
     };
     return config[code];
   }

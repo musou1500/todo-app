@@ -1,4 +1,4 @@
-import {Selector, createSelector, MemoizedSelector} from '@ngrx/store';
+import { Selector, createSelector, MemoizedSelector } from "@ngrx/store";
 
 export interface LoadableState<T> {
   loaded: boolean;
@@ -15,7 +15,7 @@ export interface LoadableSelectors<T> {
 export interface LoadableAdapter<T> {
   createInitialState: (data?: T) => LoadableState<T>;
   getSelectors: (
-    selectState: Selector<Object, LoadableState<T>>,
+    selectState: Selector<Object, LoadableState<T>>
   ) => LoadableSelectors<T>;
 
   load: <S extends LoadableState<T>>(state: S) => S;
@@ -28,7 +28,7 @@ export function createLoadableAdapter<T>(): LoadableAdapter<T> {
     return {
       loaded: false,
       loading: false,
-      data,
+      data
     };
   };
 
@@ -36,40 +36,40 @@ export function createLoadableAdapter<T>(): LoadableAdapter<T> {
     return {
       selectLoaded: createSelector(
         selectState,
-        s => s.loaded,
+        s => s.loaded
       ),
       selectLoading: createSelector(
         selectState,
-        s => s.loading,
+        s => s.loading
       ),
       selectData: createSelector(
         selectState,
-        s => s.data,
-      ),
+        s => s.data
+      )
     };
   };
 
-  const load: LoadableAdapter<T>['load'] = state => {
+  const load: LoadableAdapter<T>["load"] = state => {
     return {
       ...state,
-      loading: true,
+      loading: true
     };
   };
 
-  const success: LoadableAdapter<T>['success'] = (data, state) => {
-    return {
-      ...state,
-      loaded: true,
-      loading: false,
-      data,
-    };
-  };
-
-  const fail: LoadableAdapter<T>['fail'] = state => {
+  const success: LoadableAdapter<T>["success"] = (data, state) => {
     return {
       ...state,
       loaded: true,
       loading: false,
+      data
+    };
+  };
+
+  const fail: LoadableAdapter<T>["fail"] = state => {
+    return {
+      ...state,
+      loaded: true,
+      loading: false
     };
   };
 
@@ -78,6 +78,6 @@ export function createLoadableAdapter<T>(): LoadableAdapter<T> {
     getSelectors,
     load,
     success,
-    fail,
+    fail
   };
 }

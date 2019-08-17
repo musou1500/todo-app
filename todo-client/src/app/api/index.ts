@@ -1,2 +1,2 @@
-export * from './task.resource';
-export * from './label.resource';
+export * from "./task.resource";
+export * from "./label.resource";
